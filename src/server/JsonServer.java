@@ -1,15 +1,10 @@
+package server;
+
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
-import java.net.URI;
-import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class JsonServer {
     private static final String HOSTNAME = "localhost";
@@ -34,7 +29,10 @@ public class JsonServer {
         final HttpServer server = HttpServer.create(new InetSocketAddress(HOSTNAME, PORT), BACKLOG);
         for(String[] response : ResponseConrtoller.getResponses()) {
             server.createContext(response[0], he -> {
-                Response.sendRspond(he ,response[1], "OPTIONS", response[1] + ", OPTIONS" , response[2]);
+                try {
+                    Response.sendRspond(he ,response[1], "OPTIONS", response[1] + ", OPTIONS" , response[2]);
+                } catch (Throwable throwable) {
+                }
             });
         }
         server.start();
