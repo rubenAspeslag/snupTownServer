@@ -32,6 +32,9 @@ public class JsonServer {
                 try {
                     Response.sendRspond(he ,response[1], "OPTIONS", response[1] + ", OPTIONS" , response[2]);
                 } catch (Throwable throwable) {
+                   System.err.println("failed request: " + throwable.getMessage());
+                   System.err.println(throwable.getCause().toString());
+                   System.err.println(throwable.fillInStackTrace().toString());
                 }
             });
         }
