@@ -32,10 +32,11 @@ public class JsonServer {
 
     public static void main(final String... args) throws IOException {
         final HttpServer server = HttpServer.create(new InetSocketAddress(HOSTNAME, PORT), BACKLOG);
-        server.createContext("/demo", he -> {
-            Response.sendRspond(he ,"GET", "OPTIONS", "GET, OPTIONS" , "[test]");
-        });
-
+        for(String[] response : ResponseConrtoller.getResponses()) {
+            server.createContext(response[0], he -> {
+                Response.sendRspond(he ,response[1], "OPTIONS", response[1] + ", OPTIONS" , response[2]);
+            });
+        }
         server.start();
     }
 
