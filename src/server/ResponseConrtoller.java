@@ -1,6 +1,7 @@
 package server;
 
 import exeptions.FailedLogin;
+import json.JSONjava.src.main.java.org.json.JSONObject;
 import loginSystem.LoginSystem;
 import loginSystem.User;
 
@@ -19,25 +20,31 @@ public class ResponseConrtoller {
         return responses;
     }
 
-    public static String getResponse(String action,Map<String, List<String>> requestParameters) {
+    public static String getResponse(String action,Map<String, List<String>> requestParameters, JSONObject requestedBody) {
         if (action.equals("demo")) {
             return "[testske]";
         }
         if (action.equals("demo0")) {
             return "[testske555]";
         } if (action.equals("login")) {
-            System.out.println(requestParameters);
-            System.out.println("l30");
-            System.out.println(requestParameters.get("username").get(0));
-            System.out.println("l32");
             try {
-                    return "[sessionID: " + LoginSystem.login(requestParameters.get("username").get(0), requestParameters.get("passord").get(0));
+                System.out.println("l31");
+                return "{\"sessionID\": \"" + LoginSystem.login(requestedBody.get("username").toString(), requestedBody.get("password").toString()) + "\"}";
             } catch (FailedLogin ex) {
-                return "[error: failed to login]";
+                System.out.println("l33");
+                return "{\"error\": \"failed to login\"}";
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+                return "{\"error\": \"server error\"}";
             }
         }
         if (action.equals("register")) {
-            return "[sessionID: " + new User(requestParameters.get("username").get(0), requestParameters.get("passord").get(0)).getSessionID() +"]";
+            System.out.println("l37");
+            try {
+            return "{'sessionID': '" + new User(requestedBody.get("username").toString(), requestedBody.get("password").toString()).getSessionID() +"'}";
+            } catch (Exception ex) {
+               System.err.println(ex.getMessage()) ;
+            }
         }
         throw new UnknownError();
     }
