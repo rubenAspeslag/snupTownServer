@@ -3,7 +3,6 @@ package server;
 import exeptions.FailedLogin;
 import json.JSONjava.src.main.java.org.json.JSONObject;
 import loginSystem.LoginSystem;
-import loginSystem.User;
 
 import java.util.List;
 import java.util.Map;
@@ -41,7 +40,7 @@ public class ResponseConrtoller {
         if (action.equals("register")) {
             System.out.println("l37");
             try {
-            return "{'sessionID': '" + new User(requestedBody.get("username").toString(), requestedBody.get("password").toString()).getSessionID() +"'}";
+            return "{\"sessionID\": \"" +LoginSystem.Register(requestedBody.get("username").toString(), requestedBody.get("password").toString()) +"\"}";
             } catch (Exception ex) {
                System.err.println(ex.getMessage()) ;
             }
