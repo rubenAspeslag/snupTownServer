@@ -24,4 +24,13 @@ public class LoginSystem {
          System.out.println(user.login(username,password));
          return user.login(username,password);
     }
+
+    public static User authorise(String sessionID) {
+         for (User user : users) {
+             if (user.getSessionID().equals(sessionID)) {
+                 return user;
+             }
+         }
+         throw new IllegalStateException("user does not exist");
+    }
 }
