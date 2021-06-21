@@ -1,6 +1,8 @@
-package game.placables;
+package game.placables.resedentialBulding;
 
-public abstract class  ResedentialBulding extends Placeable{
+import game.placables.Placeable;
+
+public abstract class  ResedentialBulding extends Placeable {
     public double value;
     public final int MaxInhabitantsCount;
     public int inhabitantsCount;
