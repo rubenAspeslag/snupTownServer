@@ -14,6 +14,7 @@ public class ResponseConrtoller {
             {"/demo02" , "GET" , "demo0"},
             {"/login" , "POST" , "login"},
             {"/register" , "POST" , "register"},
+            {"/createGame" , "POST" , "createGame"},
             {"/getGames" , "POST" , "getGames"},
             {"/getBoard" , "POST" , "getBoard"}
     };
@@ -28,7 +29,8 @@ public class ResponseConrtoller {
         }
         if (action.equals("demo0")) {
             return "[testske555]";
-        } if (action.equals("login")) {
+        }
+        if (action.equals("login")) {
             return login(requestedBody);
         }
         if (action.equals("register")) {
@@ -36,8 +38,13 @@ public class ResponseConrtoller {
         }
         if (action.equals("getGames")) {
            return authorise(requestedBody).getGamesResponds();
-        }if (action.equals("getBoard")) {
+        }
+        if (action.equals("getBoard")) {
             return authorise(requestedBody).getGame(requestedBody.get("gameName").toString()).getBoard().toString();
+        }
+        if(action.equals("createGame")) {
+            authorise(requestedBody).createGame(requestedBody.get("gameName").toString());
+            return "{\"message\": \" game made\"}";
         }
         throw new UnknownError();
     }

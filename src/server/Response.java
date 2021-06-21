@@ -29,7 +29,6 @@ public class Response {
 
     private static void sendExpectedRespond(HttpExchange he,String action) throws Throwable{
         JSONObject requestedBody =  new JSONObject(getString(he.getRequestBody()));
-        System.out.println(requestedBody.get("username"));
         final Map<String, List<String>> requestParameters = Parameters.getRequestParameters(he.getRequestURI());
         final String responseBody = ResponseConrtoller.getResponse(action, requestParameters, requestedBody);
         System.out.println(responseBody);

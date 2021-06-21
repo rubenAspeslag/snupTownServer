@@ -1,6 +1,7 @@
 package loginSystem;
 
 import game.Game;
+import json.JSONjava.src.main.java.org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +40,15 @@ public class User {
         return null;
     }
     public String getGamesResponds() {
-        String string = "[";
+        JSONArray getGames = new JSONArray();
         for (Game game : games) {
-            string =string  + game;
+            getGames.put(game.getName());
         }
-        string = string + "]";
-        return string;
+        return getGames.toString();
     }
 
+    public void createGame(String gameName) {
+        System.out.println("l51");
+        games.add(new Game(gameName));
+    }
 }

@@ -12,7 +12,7 @@ public class JsonServer {
     private static final int BACKLOG = 1;
 
     private static final String HEADER_ALLOW = "Allow";
-    private static final String HEADER_CONTENT_TYPE = "Content-Type";
+    private static final String HEADER_CONTENT_TYPE = "os";
 
     private static final Charset CHARSET = StandardCharsets.UTF_8;
 

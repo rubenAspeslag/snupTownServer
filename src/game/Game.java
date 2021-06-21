@@ -11,7 +11,14 @@ public class Game {
     private Date updated;
     private final Board board = new Board();
     private final String id = IdGenerator.generate();
-    private String getName() {
+
+    public Game(String name) {
+        this.name = name;
+        this.created = new Date();
+        this.updated = new Date();
+    }
+
+    public String getName() {
         return name;
     }
 
@@ -30,4 +37,5 @@ public class Game {
     public String getId() {
         return id;
     }
+
 }
