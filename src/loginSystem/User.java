@@ -31,9 +31,12 @@ public class User {
         return games;
     }
 
-    public Game getGame(String id) {
+    public Game getGame(String name) {
         for (Game game : games) {
-            if (game.getId().equals(id)) {
+            System.out.println(name);
+            System.out.println(game.getName());
+            System.out.println("-------------------");
+            if (game.getName().equals(name)) {
                 return game;
             }
         }

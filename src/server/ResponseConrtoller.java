@@ -40,7 +40,7 @@ public class ResponseConrtoller {
            return authorise(requestedBody).getGamesResponds();
         }
         if (action.equals("getBoard")) {
-            return authorise(requestedBody).getGame(requestedBody.get("gameName").toString()).getBoard().toString();
+            return authorise(requestedBody).getGame(requestedBody.get("gameName").toString()).getBoard().getBoard();
         }
         if(action.equals("createGame")) {
             authorise(requestedBody).createGame(requestedBody.get("gameName").toString());

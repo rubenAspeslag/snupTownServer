@@ -1,21 +1,24 @@
 package game.board;
 
+import game.placables.Placeable;
+import json.JSONjava.src.main.java.org.json.JSONArray;
+
 public class Board {
     private final Placeable[][] board = new Placeable[500][500];
 
-    public Placeable[][] getBoard() {
-        return board;
-    }
-    public String toString() {
-        String string = "[";
+    public String getBoard() {
+        JSONArray getBoard = new JSONArray();
         for (Placeable[] row : board) {
-            string = string + "[";
+            JSONArray getRow = new JSONArray();
             for (Placeable placeable : row) {
-                string = string + placeable;
+                 getRow.put(placeable);
             }
-            string = string + "]";
+            getBoard.put(getRow);
         }
-        string = string + "]";
-        return string;
+        System.out.println(getBoard.toString());
+        return getBoard.toString();
     }
+
+
+
 }

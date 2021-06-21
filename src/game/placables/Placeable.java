@@ -1,4 +1,4 @@
-package game.board;
+package game.placables;
 
 public abstract class Placeable {
     private final int width;
