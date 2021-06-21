@@ -1,6 +1,7 @@
 package game;
 
 import game.board.Board;
+import loginSystem.IdGenerator;
 
 import java.util.Date;
 
@@ -9,8 +10,8 @@ public class Game {
     private Date created;
     private Date updated;
     private final Board board = new Board();
-
-    public String getName() {
+    private final String id = IdGenerator.generate();
+    private String getName() {
         return name;
     }
 
@@ -22,4 +23,11 @@ public class Game {
         return updated;
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

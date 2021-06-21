@@ -29,12 +29,22 @@ public class User {
     public List<Game> getGames() {
         return games;
     }
+
+    public Game getGame(String id) {
+        for (Game game : games) {
+            if (game.getId().equals(id)) {
+                return game;
+            }
+        }
+        return null;
+    }
     public String getGamesResponds() {
         String string = "[";
         for (Game game : games) {
-            string =string + game.getName();
+            string =string  + game;
         }
         string = string + "]";
         return string;
     }
+
 }

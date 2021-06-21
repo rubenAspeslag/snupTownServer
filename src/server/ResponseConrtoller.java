@@ -36,6 +36,8 @@ public class ResponseConrtoller {
         }
         if (action.equals("getGames")) {
            return authorise(requestedBody).getGamesResponds();
+        }if (action.equals("getBoard")) {
+            return authorise(requestedBody).getGame(requestedBody.get("gameName").toString()).getBoard().toString();
         }
         throw new UnknownError();
     }
