@@ -18,7 +18,9 @@ public class Board {
         System.out.println(getBoard.toString());
         return getBoard.toString();
     }
-
-
+    public String placeOnBoard(String building) {
+        Placeable placeable = Placeable.getPlacable(building);
+        return "{\"message\": placed on board";
+    }
 
 }

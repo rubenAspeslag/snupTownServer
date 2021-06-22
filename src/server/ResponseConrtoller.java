@@ -1,6 +1,12 @@
 package server;
 
 import exeptions.FailedLogin;
+import game.placables.Placeable;
+import game.placables.service.fire.FireService;
+import game.placables.service.garbage.GarbageService;
+import game.placables.service.police.PoliceService;
+import game.placables.service.whater.WhaterService;
+import json.JSONjava.src.main.java.org.json.JSONArray;
 import json.JSONjava.src.main.java.org.json.JSONObject;
 import loginSystem.LoginSystem;
 import loginSystem.User;
@@ -10,14 +16,28 @@ import java.util.Map;
 
 public class ResponseConrtoller {
     private static final String[][] responses = {
+            // demo
             {"/demo" , "GET" , "demo"},
             {"/demo02" , "GET" , "demo0"},
+            // login
             {"/login" , "POST" , "login"},
             {"/register" , "POST" , "register"},
+            // games
             {"/createGame" , "POST" , "createGame"},
             {"/getGames" , "POST" , "getGames"},
-            {"/getBoard" , "POST" , "getBoard"}
+            //board
+            {"/getBoard" , "POST" , "getBoard"},
+            // getPlacebles
+            {"/getPlaceables", "GET", "getPlaceables"},
+            {"/getPlaceables/service/fire", "GET", "getPlaceables:getFireStations"},
+            {"/getPlaceables/service/police", "GET", "getPlaceables:getPoliceStations"},
+            {"/getPlaceables/service/water", "GET", "getPlaceables:getWaterStations"},
+            {"/getPlaceables/service/garbage", "GET", "getPlaceables:getGarvageStations"},
+
+
     };
+
+
 
     public static String[][] getResponses() {
         return responses;
@@ -46,7 +66,39 @@ public class ResponseConrtoller {
             authorise(requestedBody).createGame(requestedBody.get("gameName").toString());
             return "{\"message\": \" game made\"}";
         }
+        if (action.contains("getPlaceables")) {
+            return getPlaceables(action);
+        }
         throw new UnknownError();
+    }
+
+    private static String getPlaceables(String action) {
+        if (action.equals("getPlaceables")) {
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.putAll(Placeable.getPlacables());
+            return jsonArray.toString();
+        }
+        if(action.equals("getPlaceables:getFireStations")) {
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.putAll(FireService.getPlacables());
+            return jsonArray.toString();
+        }
+        if(action.equals("getPlaceables:getPoliceStations")) {
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.putAll(PoliceService.getPlacables());
+            return jsonArray.toString();
+        }
+        if(action.equals("getPlaceables:getWaterStations")) {
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.putAll(WhaterService.getPlacables());
+            return jsonArray.toString();
+        }
+        if(action.equals("getPlaceables:getGarvageStations")) {
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.putAll(GarbageService.getPlacables());
+            return jsonArray.toString();
+        }
+        return "{\"error\":  \" not fount \"}";
     }
 
     public static User authorise(JSONObject requestedBody) {

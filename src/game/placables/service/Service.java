@@ -1,6 +1,10 @@
 package game.placables.service;
 
 import game.placables.Placeable;
+import game.placables.service.fire.FireService;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Service extends Placeable {
     final int serviceRadius;
@@ -17,5 +21,11 @@ public abstract class Service extends Placeable {
         this.selPrice = selPrice;
         this.spaceBound = spaceBound;
         this.polutionRatio = polutionRatio;
+    }
+
+    public static Set<String> getPlacables() {
+        Set<String> serviceMap = new HashSet<>();
+        serviceMap.addAll(FireService.getPlacables());
+        return serviceMap;
     }
 }
