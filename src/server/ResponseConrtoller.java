@@ -27,7 +27,7 @@ public class ResponseConrtoller {
             {"/createGame" , "POST" , "createGame"},
             {"/getGames" , "POST" , "getGames"},
             //board
-            {"/getBoard" , "POST" , "getBoard"},
+            {"/getGame" , "POST" , "getGame"},
             // getPlacebles
             {"/getPlaceables", "GET", "getPlaceables"},
             {"/getPlaceables/service", "GET", "getPlaceables:getServices"},
@@ -61,8 +61,11 @@ public class ResponseConrtoller {
         if (action.equals("getGames")) {
            return authorise(requestedBody).getGamesResponds();
         }
-        if (action.equals("getBoard")) {
-            return authorise(requestedBody).getGame(requestedBody.get("gameName").toString()).getBoard().getBoard();
+        if (action.equals("getGame")) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("setup",authorise(requestedBody).getGame(requestedBody.get("gameName").toString()).getBoard().getBoard() );
+            System.out.println(jsonObject.toString());
+            return jsonObject.toString();
         }
         if(action.equals("createGame")) {
             authorise(requestedBody).createGame(requestedBody.get("gameName").toString());
