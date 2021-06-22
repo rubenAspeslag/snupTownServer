@@ -28,4 +28,13 @@ public abstract class Service extends Placeable {
         serviceMap.addAll(FireService.getPlacables());
         return serviceMap;
     }
+
+    public static Set<String> getServices() {
+        Set<String> serviceMap = new HashSet<>();
+        serviceMap.add("fire");
+        serviceMap.add("police");
+        serviceMap.add("water");
+        serviceMap.add("garbage");
+        return serviceMap;
+    }
 }

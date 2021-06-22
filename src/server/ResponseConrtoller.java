@@ -2,6 +2,7 @@ package server;
 
 import exeptions.FailedLogin;
 import game.placables.Placeable;
+import game.placables.service.Service;
 import game.placables.service.fire.FireService;
 import game.placables.service.garbage.GarbageService;
 import game.placables.service.police.PoliceService;
@@ -29,6 +30,7 @@ public class ResponseConrtoller {
             {"/getBoard" , "POST" , "getBoard"},
             // getPlacebles
             {"/getPlaceables", "GET", "getPlaceables"},
+            {"/getPlaceables/service", "GET", "getPlaceables:getServices"},
             {"/getPlaceables/service/fire", "GET", "getPlaceables:getFireStations"},
             {"/getPlaceables/service/police", "GET", "getPlaceables:getPoliceStations"},
             {"/getPlaceables/service/water", "GET", "getPlaceables:getWaterStations"},
@@ -96,6 +98,11 @@ public class ResponseConrtoller {
         if(action.equals("getPlaceables:getGarvageStations")) {
             JSONArray jsonArray = new JSONArray();
             jsonArray.putAll(GarbageService.getPlacables());
+            return jsonArray.toString();
+        }
+        if(action.equals("getPlaceables:getServices")) {
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.putAll(Service.getServices());
             return jsonArray.toString();
         }
         return "{\"error\":  \" not fount \"}";
