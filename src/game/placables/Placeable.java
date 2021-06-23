@@ -22,6 +22,7 @@ public abstract class Placeable {
     }
 
     public static Placeable getPlacable(String building) {
+        if (Service.getPlacable(building) != null ) {return Service.getPlacable(building);}
         return null;
     }
     public static Set<String> getPlacables() {

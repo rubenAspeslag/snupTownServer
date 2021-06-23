@@ -2,6 +2,9 @@ package game.placables.service;
 
 import game.placables.Placeable;
 import game.placables.service.fire.FireService;
+import game.placables.service.garbage.GarbageService;
+import game.placables.service.police.PoliceService;
+import game.placables.service.whater.WhaterService;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,10 +25,20 @@ public abstract class Service extends Placeable {
         this.spaceBound = spaceBound;
         this.polutionRatio = polutionRatio;
     }
+    public static Placeable getPlacable(String building) {
+        if (FireService.getPlacable(building) != null ) {return Service.getPlacable(building);}
+        if (GarbageService.getPlacable(building) != null ) {return Service.getPlacable(building);}
+        if (PoliceService.getPlacable(building) != null ) {return Service.getPlacable(building);}
+        if (WhaterService.getPlacable(building) != null ) {return Service.getPlacable(building);}
+        return null;
+    }
 
     public static Set<String> getPlacables() {
         Set<String> serviceMap = new HashSet<>();
         serviceMap.addAll(FireService.getPlacables());
+        serviceMap.addAll(GarbageService.getPlacables());
+        serviceMap.addAll(PoliceService.getPlacables());
+        serviceMap.addAll(WhaterService.getPlacables());
         return serviceMap;
     }
 
