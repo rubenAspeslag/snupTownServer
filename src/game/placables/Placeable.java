@@ -1,6 +1,7 @@
 package game.placables;
 
 import game.placables.service.Service;
+import json.JSONjava.src.main.java.org.json.JSONObject;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,18 +9,11 @@ import java.util.Set;
 public abstract class Placeable {
     private final int width;
     private final int length;
-    private static Set<String> placeableList = initPlaceables();
     public Placeable(int width, int length) {
         this.width = width;
         this.length = length;
-        initPlaceables();
     }
 
-    private static Set<String> initPlaceables() {
-        Set<String> placeableList = new HashSet<>();
-        placeableList.addAll(Service.getPlacables());
-        return placeableList;
-    }
 
     public static Placeable getPlacable(String building) {
         if (Service.getPlacable(building) != null ) {return Service.getPlacable(building);}
@@ -37,5 +31,12 @@ public abstract class Placeable {
 
     public int getLength() {
         return length;
+    }
+
+    public  JSONObject getJSON() {
+        JSONObject placeable = new JSONObject();
+        placeable.put("width",width);
+        placeable.put("length",length);
+        return placeable;
     }
 }

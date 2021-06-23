@@ -16,7 +16,6 @@ public abstract class FireService extends Service {
         if (building.equals("LargeFireStation")) {return new DumpingGround();}
         if (building.equals("MediumFireStation")) {return new DumpingGround();}
         if (building.equals("SmallFireStation")) {return new DumpingGround();}
-
         return null;
     }
     public static Set<String> getPlacables() {

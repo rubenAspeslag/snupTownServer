@@ -3,15 +3,16 @@ package game.board;
 import game.placables.Placeable;
 import json.JSONjava.src.main.java.org.json.JSONArray;
 
+
 public class Board {
-    private final Placeable[][] board = new Placeable[500][500];
+    private final Field[][] board = new Field[500][500];
 
     public String getBoard() {
         JSONArray getBoard = new JSONArray();
-        for (Placeable[] row : board) {
+        for (Field[] row : board) {
             JSONArray getRow = new JSONArray();
-            for (Placeable placeable : row) {
-                 getRow.put(placeable);
+            for (Field field : row) {
+                 getRow.put(field.getField());
             }
             getBoard.put(getRow);
         }
